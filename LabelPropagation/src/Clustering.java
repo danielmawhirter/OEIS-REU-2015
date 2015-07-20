@@ -22,7 +22,7 @@ public class Clustering {
 			boolean vis, boolean ui, int peel_layers, boolean semi_ext)
 			throws IOException {
 		
-		if (LabelPropogation.authors_flag) 
+		if (LabelPropagation.authors_flag) 
 			clstr_mark = "CLUSTER";
 		
 		TreeMap<Integer, Graph> Graph_Set = new TreeMap<Integer, Graph>();
@@ -38,7 +38,7 @@ public class Clustering {
 		while (true) {
 			//System.out.println("LP it.: " + 1 + ", graph: " + i);
 			// Run an LPA depending on size of graph
-			if ((semi_ext && (Graph_Set.get(i).getNodeCount() > LabelPropogation.internal_node_limit || i == 1
+			if ((semi_ext && (Graph_Set.get(i).getNodeCount() > LabelPropagation.internal_node_limit || i == 1
 					|| Graph_Set.get(i).getEdgeCount() == 0))) {
 				Graph_Set.put(i + 1, semi_ext_label_propogation(Graph_Set.get(i)));
 			}
@@ -49,7 +49,7 @@ public class Clustering {
 					 + Graph_Set.get(i + 1).getNodeSet().size() + " vertices.");
 			
 			i++;
-			if (Graph_Set.get(i).getNodeCount() < LabelPropogation.top_level_node_limit) {
+			if (Graph_Set.get(i).getNodeCount() < LabelPropagation.top_level_node_limit) {
 				System.out.println("Coarsening phase 1 is done.");
 				break;
 			}
@@ -156,7 +156,7 @@ public class Clustering {
 		TreeMap<Integer, Graph> Graph_Set2 = new TreeMap<Integer, Graph>();
 		Graph_Set2 = Graph_Setr;
 		
-		LabelPropogation.tree.remove("disc_components_tree");
+		LabelPropagation.tree.remove("disc_components_tree");
 		//LabelPropogation.fill_anti_chain(Graph_Set2.get(1));
 		
 		/*
@@ -168,17 +168,17 @@ public class Clustering {
 		// Remove nodes from tree which are not part of giant component
 		ArrayList<String> nodes_to_remove = new ArrayList<String>();
 		
-		for (String key : LabelPropogation.tree.keySet()) {
+		for (String key : LabelPropagation.tree.keySet()) {
 			if (!Graph_Set2.get(1).idToNode.containsKey(key))
 				nodes_to_remove.add(key);
 		}
 		
 		for (String rem : nodes_to_remove) {
-			LabelPropogation.tree.remove(rem);
+			LabelPropagation.tree.remove(rem);
 		}
 		
 		i = 1;
-		LabelPropogation.top_level_node_limit = 200;
+		LabelPropagation.top_level_node_limit = 200;
 		while (true) {
 			
 			// Test initial cluster IDs
@@ -190,7 +190,7 @@ public class Clustering {
 			
 			//System.out.println("LP it.: " + 2 + ", graph: " + i);
 			// Run an LPA depending on size of graph
-			if ((semi_ext && (Graph_Set2.get(i).getNodeCount() > LabelPropogation.internal_node_limit || i == 1
+			if ((semi_ext && (Graph_Set2.get(i).getNodeCount() > LabelPropagation.internal_node_limit || i == 1
 					|| Graph_Set2.get(i).getEdgeCount() == 0))) {
 				Graph_Set2.put(i + 1, semi_ext_label_propogation(Graph_Set2.get(i)));
 			}
@@ -202,7 +202,7 @@ public class Clustering {
 					+ " vertices and " + Graph_Set2.get(i+1).getEdgeCount() + " edges.");
 			
 			i++;
-			if (Graph_Set2.get(i).getNodeCount() < LabelPropogation.top_level_node_limit) {
+			if (Graph_Set2.get(i).getNodeCount() < LabelPropagation.top_level_node_limit) {
 				System.out.println("Coarsening phase 2 is done.");
 				break;
 			}
@@ -210,7 +210,7 @@ public class Clustering {
 		
 		// Create root TreeNode
 		TreeNode<String> root = new TreeNode<String>("root");
-		for (TreeNode<String> c : LabelPropogation.tree.values()) {
+		for (TreeNode<String> c : LabelPropagation.tree.values()) {
 			root.addChild(c);
 		}
 		
@@ -234,7 +234,7 @@ public class Clustering {
 		System.out.println("Top clusters: " + root.getChildren());
 		
 		// Output file
-		TreeNode.outputTree(root, "./" + LabelPropogation.path + "/" + LabelPropogation.tree_file_name);
+		TreeNode.outputTree(root, "./" + LabelPropagation.path + "/" + LabelPropagation.tree_file_name);
 		
 		System.out.println("Done.");
 	}
@@ -472,14 +472,14 @@ public class Clustering {
 		
 		// Set size constraint here:
 		// LabelPropogation.size_constraint = (((double) LabelPropogation.total_node_weight) / ((double) graph.getNodeCount()));
-		LabelPropogation.size_constraint = (1.0 + LabelPropogation.epsilon) * (num_vertices / LabelPropogation.k);
+		LabelPropagation.size_constraint = (1.0 + LabelPropagation.epsilon) * (num_vertices / LabelPropagation.k);
 		
-		if (LabelPropogation.authors_flag)
-			LabelPropogation.size_constraint = 3000;
+		if (LabelPropagation.authors_flag)
+			LabelPropagation.size_constraint = 3000;
 		
 		if (refinement_flag || second_contraction_flag) {
 			System.out.println("Running internal label propogation on graph "
-					+ graph.getId() + " with size-constraint=" + LabelPropogation.size_constraint + "...");
+					+ graph.getId() + " with size-constraint=" + LabelPropagation.size_constraint + "...");
 		}
 		else {
 			System.out.println("Running internal label propogation on graph "
@@ -528,10 +528,10 @@ public class Clustering {
 				if (current > max) {
 					// apply size constraint
 					if (refinement_flag || second_contraction_flag) {
-						if (current > LabelPropogation.size_constraint) {
+						if (current > LabelPropagation.size_constraint) {
 							//System.out.println("Rejected move: " + n.id + "--->" + s);
 						}
-						if(current <= LabelPropogation.size_constraint) {
+						if(current <= LabelPropagation.size_constraint) {
 							max = current;
 							bestCluster = s;
 							moved = true;
@@ -655,7 +655,7 @@ public class Clustering {
 		// Set size constraint here:
 		// LabelPropogation.size_constraint = ((100000.00) / ((double) graph.getNodeCount()));
 		// LabelPropogation.size_constraint = (((double) LabelPropogation.total_node_weight) / ((double) graph.getNodeCount()));
-		LabelPropogation.size_constraint = (1.0 + LabelPropogation.epsilon) * (num_vertices / LabelPropogation.k);
+		LabelPropagation.size_constraint = (1.0 + LabelPropagation.epsilon) * (num_vertices / LabelPropagation.k);
 		System.out.println("Running semi-external label propogation on graph "
 				+ graph.getId() + "...");
 		if (!refinement_flag || graph.getId() != "1") {
@@ -676,14 +676,14 @@ public class Clustering {
 			FileReader file;
 			if (graph.getId() == "1") {
 				//file = new FileReader("Z:\\REU OEIS Group\\" + LabelPropogation.graph_file_name);
-				file = new FileReader(LabelPropogation.path + "/" 
-				+ LabelPropogation.graph_file_name.substring(0, 
-						LabelPropogation.graph_file_name.length() - 4) 
+				file = new FileReader(LabelPropagation.path + "/" 
+				+ LabelPropagation.graph_file_name.substring(0, 
+						LabelPropagation.graph_file_name.length() - 4) 
 				+ '-' + "1" + "-Edge_Set.txt");
 			}
 			else 
-				file = new FileReader(LabelPropogation.path + "/"
-						+ LabelPropogation.graph_file_name.substring(0, LabelPropogation.graph_file_name.length() - 4) 
+				file = new FileReader(LabelPropagation.path + "/"
+						+ LabelPropagation.graph_file_name.substring(0, LabelPropagation.graph_file_name.length() - 4) 
 						+ '-' + graph.getId() + "-Edge_Set.txt");
 			BufferedReader reader = new BufferedReader(file);
 			String line;
@@ -733,7 +733,7 @@ public class Clustering {
 					if (current > max) {
 						// apply size constraint if in refinement phase
 						if (refinement_flag || second_contraction_flag) {
-							if (current > LabelPropogation.size_constraint) {
+							if (current > LabelPropagation.size_constraint) {
 								//System.out.println("Rejected move: " + n.id + "--->" + s);
 							}
 							else {
@@ -821,7 +821,7 @@ public class Clustering {
 			qnode.int_edge_wsum = 1; // wrong, fix later maybe
 		}
 		
-		if (quotient.getNodeCount() < LabelPropogation.internal_node_limit) {
+		if (quotient.getNodeCount() < LabelPropagation.internal_node_limit) {
 			System.out.println("Building quotient graph " + graph_num + " internally...");
 			build_QuotientEdgeSet_internal (graph, quotient, clusters);
 			if (!refinement_flag || first_refinement_iteration)
@@ -847,8 +847,8 @@ public class Clustering {
 			try {
 
 				BufferedReader reader = new BufferedReader(new FileReader(
-						LabelPropogation.path + "/" 
-						+ LabelPropogation.graph_file_name.substring(0, LabelPropogation.graph_file_name.length() - 4) 
+						LabelPropagation.path + "/" 
+						+ LabelPropagation.graph_file_name.substring(0, LabelPropagation.graph_file_name.length() - 4) 
 						+ '-' + (Integer.parseInt(quotient.getId()) - 1) + "-Edge_Set.txt"));
 				String line;
 
@@ -895,11 +895,11 @@ public class Clustering {
 						if (c1_edges.containsKey(c2_name)) {
 							int old_weight = c1_edges.get(c2_name);
 							c1_edges.put(c2_name, old_weight + edge_weight);
-							LabelPropogation.degree_map.put(c1_name, old_weight + edge_weight);
+							LabelPropagation.degree_map.put(c1_name, old_weight + edge_weight);
 						}
 						else {
 							c1_edges.put(c2_name, edge_weight);
-							LabelPropogation.degree_map.put(c1_name, edge_weight);
+							LabelPropagation.degree_map.put(c1_name, edge_weight);
 						}
 							
 						
@@ -912,11 +912,11 @@ public class Clustering {
 						if (c2_edges.containsKey(c1_name)) {
 							int old_weight = c2_edges.get(c1_name);
 							c2_edges.put(c1_name, old_weight + edge_weight);	
-							LabelPropogation.degree_map.put(c2_name, old_weight + edge_weight);
+							LabelPropagation.degree_map.put(c2_name, old_weight + edge_weight);
 						}
 						else {
 							c2_edges.put(c1_name, edge_weight);
-							LabelPropogation.degree_map.put(c2_name, edge_weight);
+							LabelPropagation.degree_map.put(c2_name, edge_weight);
 						}
 						
 						EdgeSet.put(c1_name, c1_edges);
@@ -942,13 +942,13 @@ public class Clustering {
 		
 		System.out.println("Storing graph " + quotient.getId() + "...");
 
-		String edge_file_name = LabelPropogation.graph_file_name.substring(0, LabelPropogation.graph_file_name.length() - 4) 
+		String edge_file_name = LabelPropagation.graph_file_name.substring(0, LabelPropagation.graph_file_name.length() - 4) 
 				+ '-' + quotient.getId() + "-Edge_Set.txt";
 
-		PrintWriter pf = new PrintWriter("./" + LabelPropogation.path + '/' + edge_file_name);
+		PrintWriter pf = new PrintWriter("./" + LabelPropagation.path + '/' + edge_file_name);
 		pf.close();
 
-		PrintWriter edge_file = new PrintWriter("./" + LabelPropogation.path + '/'
+		PrintWriter edge_file = new PrintWriter("./" + LabelPropagation.path + '/'
 				+ edge_file_name);
 
 		for (String s : EdgeSet.keySet()) {
@@ -972,8 +972,8 @@ public class Clustering {
 			try {
 
 				BufferedReader reader = new BufferedReader(new FileReader(
-						LabelPropogation.path + "/" 
-						+ LabelPropogation.graph_file_name.substring(0, LabelPropogation.graph_file_name.length() - 4) 
+						LabelPropagation.path + "/" 
+						+ LabelPropagation.graph_file_name.substring(0, LabelPropagation.graph_file_name.length() - 4) 
 						+ '-' + (Integer.parseInt(quotient.getId()) - 1) + "-Edge_Set.txt"));
 				String line;
 
@@ -1049,7 +1049,7 @@ public class Clustering {
 		ArrayList<String> to_add    = new ArrayList<String>();
 		
 		if (second_contraction_flag) {
-			for (String tree_node_label : LabelPropogation.tree.keySet()) {
+			for (String tree_node_label : LabelPropagation.tree.keySet()) {
 				
 				if (tree_node_label.contains("disc_components"))
 					continue;
@@ -1065,14 +1065,14 @@ public class Clustering {
 					System.out.println(clust + " is null");
 				
 				// set n as child of cluster
-				clustId_to_treenode.get(clust).addChild(LabelPropogation.tree.get(tree_node_label));
+				clustId_to_treenode.get(clust).addChild(LabelPropagation.tree.get(tree_node_label));
 	
 				// remove n from anti-chain
 				to_remove.add(tree_node_label);
 			}
 	
 			for (String m : to_remove) {
-				LabelPropogation.tree.remove(m);
+				LabelPropagation.tree.remove(m);
 			}
 	
 			to_remove.clear();
@@ -1095,7 +1095,7 @@ public class Clustering {
 				continue;
 			}
 			
-			LabelPropogation.tree.put(s, clustId_to_treenode.get(s));
+			LabelPropagation.tree.put(s, clustId_to_treenode.get(s));
 		}
 		
 		////////////////////////
@@ -1119,7 +1119,7 @@ public class Clustering {
 		
 		if (second_contraction_flag) {
 
-			for (String tree_node_label : LabelPropogation.tree.keySet()) {
+			for (String tree_node_label : LabelPropagation.tree.keySet()) {
 				
 				if (tree_node_label.contains("disc_components"))
 					continue;
@@ -1132,14 +1132,14 @@ public class Clustering {
 				String clust = node.clusterId;
 	
 				// set n as child of cluster
-				clustId_to_treenode.get(clust).addChild(LabelPropogation.tree.get(tree_node_label));
+				clustId_to_treenode.get(clust).addChild(LabelPropagation.tree.get(tree_node_label));
 	
 				// remove n from anti-chain
 				to_remove.add(tree_node_label);
 			}
 	
 			for (String m : to_remove) {
-				LabelPropogation.tree.remove(m);
+				LabelPropagation.tree.remove(m);
 			}
 	
 			to_remove.clear();
@@ -1150,7 +1150,7 @@ public class Clustering {
 		// add clusters to anti-chain and collect zero degree clusters
 		for (String s : clusters.keySet()) {
 			
-			if (!LabelPropogation.degree_map.containsKey(s)) {
+			if (!LabelPropagation.degree_map.containsKey(s)) {
 				if (second_contraction_flag) {
 					TreeNode<String> clust_to_remove = new TreeNode<String>(s);
 					disconnected_components.addChild(clust_to_remove);
@@ -1160,7 +1160,7 @@ public class Clustering {
 				continue;
 			}
 			
-			LabelPropogation.tree.put(s, clustId_to_treenode.get(s));
+			LabelPropagation.tree.put(s, clustId_to_treenode.get(s));
 		}
 		
 		/////////////////////// DISC components stuff

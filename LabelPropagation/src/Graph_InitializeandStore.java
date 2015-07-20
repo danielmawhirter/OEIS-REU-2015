@@ -35,7 +35,7 @@ public class Graph_InitializeandStore {
 		for (GraphNode n : g.getNodeSet()) {
 			nodes.add(n);
 		}
-		if (!LabelPropogation.authors_flag)
+		if (!LabelPropagation.authors_flag)
 			Collections.sort(nodes, idComparator);
 
 		for (GraphNode n : nodes) {
@@ -73,7 +73,7 @@ public class Graph_InitializeandStore {
 			nodes.add(n);
 		}
 		
-		if (!LabelPropogation.authors_flag)
+		if (!LabelPropagation.authors_flag)
 			Collections.sort(nodes, idComparator);
 
 		for (GraphNode n : nodes) {
@@ -95,10 +95,10 @@ public class Graph_InitializeandStore {
 	public static Graph initialize_graph_crossref(String filename, boolean semi_ext) 
 			throws IOException {
 		
-		java.nio.file.Path FROM = Paths.get(LabelPropogation.graph_file_name);
-		java.nio.file.Path TO = Paths.get(LabelPropogation.path + "/" 
-				+ LabelPropogation.graph_file_name.substring(0, 
-						LabelPropogation.graph_file_name.length() - 4) 
+		java.nio.file.Path FROM = Paths.get(LabelPropagation.graph_file_name);
+		java.nio.file.Path TO = Paths.get(LabelPropagation.path + "/" 
+				+ LabelPropagation.graph_file_name.substring(0, 
+						LabelPropagation.graph_file_name.length() - 4) 
 				+ '-' + "1" + "-Edge_Set.txt");
 		
 		Files.copy(FROM, TO);
@@ -149,7 +149,7 @@ public class Graph_InitializeandStore {
 				}
 
 				// Specify number of nodes to add
-				if (id > LabelPropogation.capacity) {
+				if (id > LabelPropagation.capacity) {
 					break;
 				}
 
@@ -179,10 +179,10 @@ public class Graph_InitializeandStore {
 	public static Graph initialize_graph(String filename, boolean semi_ext) 
 			throws IOException {
 		
-		java.nio.file.Path FROM = Paths.get(LabelPropogation.graph_file_name);
-		java.nio.file.Path TO = Paths.get(LabelPropogation.path + "/" 
-				+ LabelPropogation.graph_file_name.substring(0, 
-						LabelPropogation.graph_file_name.length() - 4) 
+		java.nio.file.Path FROM = Paths.get(LabelPropagation.graph_file_name);
+		java.nio.file.Path TO = Paths.get(LabelPropagation.path + "/" 
+				+ LabelPropagation.graph_file_name.substring(0, 
+						LabelPropagation.graph_file_name.length() - 4) 
 				+ '-' + "1" + "-Edge_Set.txt");
 		
 		Files.copy(FROM, TO);
@@ -228,11 +228,11 @@ public class Graph_InitializeandStore {
 					
 					GraphNode destnode = graph.getNode(dest_name);
 					
-					if (!LabelPropogation.degree_map.containsKey(current_name)) 
-						LabelPropogation.degree_map.put(current_name, 1);
+					if (!LabelPropagation.degree_map.containsKey(current_name)) 
+						LabelPropagation.degree_map.put(current_name, 1);
 					else {
-						int old_deg = LabelPropogation.degree_map.get(current_name);
-						LabelPropogation.degree_map.put(current_name, old_deg + 1);
+						int old_deg = LabelPropagation.degree_map.get(current_name);
+						LabelPropagation.degree_map.put(current_name, old_deg + 1);
 					}
 					
 					// add destnode to graph if not yet added
@@ -255,7 +255,7 @@ public class Graph_InitializeandStore {
 								!graph.hasEdgeBetween(destnode, currentnode)) {
 							Edge ei = graph.addEdge(currentnode, destnode);
 							ei.weight = edge_weight;
-							LabelPropogation.total_edge_weight += edge_weight;
+							LabelPropagation.total_edge_weight += edge_weight;
 						}
 					}
 							
@@ -263,14 +263,14 @@ public class Graph_InitializeandStore {
 				
 				count++;
 				// Specify number of nodes to add
-				if (count > LabelPropogation.capacity && !semi_ext) {
+				if (count > LabelPropagation.capacity && !semi_ext) {
 					break;
 				}
 				
 				
 			}
 			
-			LabelPropogation.total_node_weight = graph.getNodeCount();
+			LabelPropagation.total_node_weight = graph.getNodeCount();
 
 			reader.close();
 			file_r.close();
@@ -290,10 +290,10 @@ public class Graph_InitializeandStore {
 	public static Graph initialize_graph_unweighted(String filename, boolean semi_ext) 
 			throws IOException {
 		
-		java.nio.file.Path FROM = Paths.get(LabelPropogation.graph_file_name);
-		java.nio.file.Path TO = Paths.get(LabelPropogation.path + "/" 
-				+ LabelPropogation.graph_file_name.substring(0, 
-						LabelPropogation.graph_file_name.length() - 4) 
+		java.nio.file.Path FROM = Paths.get(LabelPropagation.graph_file_name);
+		java.nio.file.Path TO = Paths.get(LabelPropagation.path + "/" 
+				+ LabelPropagation.graph_file_name.substring(0, 
+						LabelPropagation.graph_file_name.length() - 4) 
 				+ '-' + "1" + "-Edge_Set.txt");
 		
 		Files.copy(FROM, TO);
@@ -336,11 +336,11 @@ public class Graph_InitializeandStore {
 					
 					GraphNode destnode = graph.getNode(dest_name);
 					
-					if (!LabelPropogation.degree_map.containsKey(current_name)) 
-						LabelPropogation.degree_map.put(current_name, 1);
+					if (!LabelPropagation.degree_map.containsKey(current_name)) 
+						LabelPropagation.degree_map.put(current_name, 1);
 					else {
-						int old_deg = LabelPropogation.degree_map.get(current_name);
-						LabelPropogation.degree_map.put(current_name, old_deg + 1);
+						int old_deg = LabelPropagation.degree_map.get(current_name);
+						LabelPropagation.degree_map.put(current_name, old_deg + 1);
 					}
 					
 					// add destnode to graph if not yet added
@@ -363,7 +363,7 @@ public class Graph_InitializeandStore {
 								!graph.hasEdgeBetween(destnode, currentnode)) {
 							Edge ei = graph.addEdge(currentnode, destnode);
 							ei.weight = 1;
-							LabelPropogation.total_edge_weight += 1;
+							LabelPropagation.total_edge_weight += 1;
 						}
 					}
 							
@@ -371,14 +371,14 @@ public class Graph_InitializeandStore {
 				
 				count++;
 				// Specify number of nodes to add
-				if (count > LabelPropogation.capacity && !semi_ext) {
+				if (count > LabelPropagation.capacity && !semi_ext) {
 					break;
 				}
 				
 				
 			}
 			
-			LabelPropogation.total_node_weight = graph.getNodeCount();
+			LabelPropagation.total_node_weight = graph.getNodeCount();
 
 			reader.close();
 			file_r.close();

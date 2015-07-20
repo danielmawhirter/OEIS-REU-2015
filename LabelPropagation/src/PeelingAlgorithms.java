@@ -26,7 +26,7 @@ public class PeelingAlgorithms {
 		ArrayList<String> peeled_nodes = new ArrayList<String>();
 		
 		TreeNode<String> disconnected_components = new TreeNode<String>("disc_components");
-		LabelPropogation.tree.put("disc_components", disconnected_components);
+		LabelPropagation.tree.put("disc_components", disconnected_components);
 		
 		for (GraphNode v : graph.getNodeSet()) {
 			if (!peeled_nodes.contains(v.toString()) && counter.get(v.toString()) < k) {
@@ -39,14 +39,14 @@ public class PeelingAlgorithms {
 				
 				if (counter.get(v.toString()) == 0) {
 					TreeNode<String> v_tn = null;
-					if (!LabelPropogation.tree.containsKey(v.toString())) {
+					if (!LabelPropagation.tree.containsKey(v.toString())) {
 						v_tn = new TreeNode<String>(v.toString());
 						disconnected_components.addChild(v_tn);
 					}
 					else {
-						v_tn = LabelPropogation.tree.get(v.toString());
+						v_tn = LabelPropagation.tree.get(v.toString());
 						disconnected_components.addChild(v_tn);
-						LabelPropogation.tree.remove(v.toString());
+						LabelPropagation.tree.remove(v.toString());
 					}
 				}
 				else {
@@ -59,28 +59,28 @@ public class PeelingAlgorithms {
 						}
 					}
 					// System.out.println("peeling degree 1 vertex: " + v.toString() + " with parent " + adj_v.toString());
-					if (!LabelPropogation.tree.containsKey(adj_v.toString())) {
-						LabelPropogation.tree.put(adj_v.toString(), new TreeNode<String>(adj_v.toString()));
+					if (!LabelPropagation.tree.containsKey(adj_v.toString())) {
+						LabelPropagation.tree.put(adj_v.toString(), new TreeNode<String>(adj_v.toString()));
 					}
 					TreeNode<String> v_tree = null;
-					if (!LabelPropogation.tree.containsKey(v.toString())) {
+					if (!LabelPropagation.tree.containsKey(v.toString())) {
 						v_tree = new TreeNode<String>(v.toString());
-						LabelPropogation.tree.get(adj_v.toString()).addChild(v_tree);
+						LabelPropagation.tree.get(adj_v.toString()).addChild(v_tree);
 					}
 					else {
 						
-						v_tree = LabelPropogation.tree.get(v.id);
-						LabelPropogation.tree.get(adj_v.id).addChild(v_tree);
+						v_tree = LabelPropagation.tree.get(v.id);
+						LabelPropagation.tree.get(adj_v.id).addChild(v_tree);
 						
 						for (TreeNode<String> child : v_tree.getChildren()) {
-							LabelPropogation.tree.get(adj_v.toString()).addChild(child);
+							LabelPropagation.tree.get(adj_v.toString()).addChild(child);
 						}
 	
 						v_tree.clearChildren();
   
-						LabelPropogation.tree.remove(v.toString());
+						LabelPropagation.tree.remove(v.toString());
 					}
-					LabelPropogation.tree.remove(v.toString());
+					LabelPropagation.tree.remove(v.toString());
 						
 				}
 				
@@ -101,14 +101,14 @@ public class PeelingAlgorithms {
 							
 							if (counter.get(u.toString()) == 0) {
 								TreeNode<String> u_tn = null;
-								if (!LabelPropogation.tree.containsKey(u.toString())) {
+								if (!LabelPropagation.tree.containsKey(u.toString())) {
 									u_tn = new TreeNode<String>(u.toString());
 									disconnected_components.addChild(u_tn);
 								}
 								else {
-									u_tn = LabelPropogation.tree.get(u.toString());
+									u_tn = LabelPropagation.tree.get(u.toString());
 									disconnected_components.addChild(u_tn);
-									LabelPropogation.tree.remove(u.toString());
+									LabelPropagation.tree.remove(u.toString());
 								}
 								
 							}
@@ -126,26 +126,26 @@ public class PeelingAlgorithms {
 									
 								}
 								// System.out.println("peeling degree 1 vertex: " + u.toString() + " with parent " + adj_u.toString());
-								if (!LabelPropogation.tree.containsKey(adj_u.toString())) {
-									LabelPropogation.tree.put(adj_u.toString(), new TreeNode<String>(adj_u.toString()));
+								if (!LabelPropagation.tree.containsKey(adj_u.toString())) {
+									LabelPropagation.tree.put(adj_u.toString(), new TreeNode<String>(adj_u.toString()));
 								}
 								TreeNode<String> u_tree = null;
-								if (!LabelPropogation.tree.containsKey(u.toString())) {
+								if (!LabelPropagation.tree.containsKey(u.toString())) {
 									u_tree = new TreeNode<String>(u.toString());
-									LabelPropogation.tree.get(adj_u.toString()).addChild(u_tree);
+									LabelPropagation.tree.get(adj_u.toString()).addChild(u_tree);
 								}
 								else {		
-									u_tree = LabelPropogation.tree.get(u.toString());
-									LabelPropogation.tree.get(adj_u.toString()).addChild(u_tree);
+									u_tree = LabelPropagation.tree.get(u.toString());
+									LabelPropagation.tree.get(adj_u.toString()).addChild(u_tree);
 									
 									for (TreeNode<String> u_child : u_tree.getChildren()) {
-										LabelPropogation.tree.get(adj_u.toString()).addChild(u_child);
+										LabelPropagation.tree.get(adj_u.toString()).addChild(u_child);
 									}
 									
 									u_tree.clearChildren();
-									LabelPropogation.tree.remove(u.toString());
+									LabelPropagation.tree.remove(u.toString());
 								}
-								LabelPropogation.tree.remove(u.toString());
+								LabelPropagation.tree.remove(u.toString());
 									
 							}
 							
@@ -160,23 +160,23 @@ public class PeelingAlgorithms {
 		HashMap<String, TreeNode<String>> to_replace = new HashMap<String, TreeNode<String>>();
 		
 		// replacement
-		for (String s : LabelPropogation.tree.keySet()) {
-			TreeNode<String> obj = LabelPropogation.tree.get(s);
+		for (String s : LabelPropagation.tree.keySet()) {
+			TreeNode<String> obj = LabelPropagation.tree.get(s);
 			to_replace.put(s + "_tree", obj);
 		}
 		
-		LabelPropogation.tree.clear();
+		LabelPropagation.tree.clear();
 		
 		for (String s : to_replace.keySet()) {
 			TreeNode<String> obj = to_replace.get(s);
 			String old_Object = obj.toString();
 			obj.setObject(old_Object + "_tree");
-			LabelPropogation.tree.put(s, obj);
+			LabelPropagation.tree.put(s, obj);
 		}
 		// end replacement
 		
 		
-		for (String tree_node : LabelPropogation.tree.keySet()) {
+		for (String tree_node : LabelPropagation.tree.keySet()) {
 			
 			if (tree_node.contains("disc"))
 				continue;
@@ -186,13 +186,13 @@ public class PeelingAlgorithms {
 			GraphNode n1 = graph.addNode(tree_node);
 			GraphNode n2 = graph.getNode(non_tree_node);
 				
-			n1.weight = LabelPropogation.tree.get(tree_node).getChildCount(); // node weight is size of tree
+			n1.weight = LabelPropagation.tree.get(tree_node).getChildCount(); // node weight is size of tree
 			n2.weight = 1;
-			LabelPropogation.total_node_weight += LabelPropogation.tree.get(tree_node).getChildCount();
+			LabelPropagation.total_node_weight += LabelPropagation.tree.get(tree_node).getChildCount();
 			
 			int weight = 2; 
 			graph.addEdge(n1, n2).weight = weight;
-			LabelPropogation.total_edge_weight += weight;
+			LabelPropagation.total_edge_weight += weight;
 			
 			// Edge weight:
 			// = 1000 for jaccard graph

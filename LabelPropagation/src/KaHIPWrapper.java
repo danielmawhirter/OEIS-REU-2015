@@ -20,13 +20,6 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.
  *****************************************************************************/
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.lang.*;
-
 public class KaHIPWrapper {
 
 	private final static String NativeLibraryName = "wrapkahip";
@@ -42,6 +35,8 @@ public class KaHIPWrapper {
 		try {
 			System.loadLibrary(NativeLibraryName);
 		} catch (UnsatisfiedLinkError e) {
+			// environment: LD_LIBRARY_PATH=libs
+			// no libs folder, make it, add so/dll libraries
 			System.out.println("KaHIPWrapper - Error cannot find " + NativeLibraryName);
 			e.printStackTrace();
 		}
