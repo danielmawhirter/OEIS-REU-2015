@@ -392,7 +392,7 @@ public class Main {
 		HashSet<Node> reps = new HashSet<Node>();
 
 		for (Node n : graph) {
-			if (n.getAttribute("represented")) {
+			if (n.getAttribute("represented") != null) {
 				continue;
 			}
 			int same = 0;
@@ -528,7 +528,7 @@ public class Main {
 		HashSet<Edge> reps = new HashSet<Edge>();
 
 		for (Edge e : graph.getEdgeSet()) {
-			if (e.getAttribute("represented")) {
+			if (e.getAttribute("represented") != null) {
 				continue;
 			}
 
