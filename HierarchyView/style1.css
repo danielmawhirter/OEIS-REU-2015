@@ -1,0 +1,11 @@
+node {
+	size-mode: dyn-size;
+	fill-mode: dyn-plain;
+	size: 5px;
+	fill-color: red, orange, yellow;
+}
+
+edge {
+	fill-mode: dyn-plain;
+	fill-color: rgba(0,0,0,10), rgba(0,0,0,200);
+}

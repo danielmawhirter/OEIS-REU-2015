@@ -1,0 +1,13 @@
+node {
+	size-mode: dyn-size;
+	size: 20px;
+	fill-mode: dyn-plain;
+	fill-color: red, orange, yellow, green, blue, indigo, purple;
+}
+node.selected {
+	fill-color: black;
+}
+edge {
+	fill-color: rgba(0, 0, 255, 100);
+	stroke-width: 1;
+}
